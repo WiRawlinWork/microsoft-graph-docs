@@ -37,6 +37,7 @@ Deleting a **plannerRoster** will also delete the plan and all tasks in the plan
 |Property|Type|Description|
 |:---|:---|:---|
 |id|String|Read only. Identifier of the **plannerRoster**. Inherited from [entity](../resources/entity.md)|
+|sensitivityLabelId|String|Identifier of the **informationProtectionLabel** associated with the roster|
 
 ## Relationships
 |Relationship|Type|Description|
@@ -58,6 +59,7 @@ The following is a JSON representation of the resource.
 {
   "@odata.type": "#microsoft.graph.plannerRoster",
   "id": "String (identifier)"
+  "sensitivityLabelId": "String (identifier)"
 }
 ```
 
