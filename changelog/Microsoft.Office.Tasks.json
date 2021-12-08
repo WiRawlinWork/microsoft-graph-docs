@@ -2,6 +2,22 @@
   "changelog": [
     {
       "ChangeList": [
+      {
+          "Id": "6dd4939a-91c4-46c7-9dcd-94ebd0f750e8",
+          "ApiChange": "EnumType",
+          "ChangedApiName": "plannerContextState",
+          "ChangeType": "Addition",
+          "Description": "Added the **plannerContextState** enumeration type.",
+          "Target": "plannerContextState"
+        },
+        {
+          "Id": "6dd4939a-91c4-46c7-9dcd-94ebd0f750e8",
+          "ApiChange": "Property",
+          "ChangedApiName": "state",
+          "ChangeType": "Addition",
+          "Description": "Added the **state** property to [plannerPlanContextDetails](https://docs.microsoft.com/en-us/graph/api/resources/plannerPlanContextDetails?view=graph-rest-beta) resource.",
+          "Target": "plannerPlanContextDetails"
+        },
         {
           "Id": "6aa8d44e-1415-43ef-b71f-c680382941ea",
           "ApiChange": "Permission",
