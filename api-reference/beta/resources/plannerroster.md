@@ -37,7 +37,7 @@ Deleting a **plannerRoster** will also delete the plan and all tasks in the plan
 |Property|Type|Description|
 |:---|:---|:---|
 |id|String|Read only. Identifier of the **plannerRoster**. Inherited from [entity](../resources/entity.md)|
-|sensitivityLabelId|String|Identifier of the **informationProtectionLabel** associated with the roster|
+|informationProtectionLabelId|String|The ID of the sensitivity label applied to the roster. If mandatory labeling is enabled and a default label is not set, the user can't save until they select a label.  If mandatory labeling is enabled and a default label is set, the default will be applied if the user hasn't made another selection.|
 
 ## Relationships
 |Relationship|Type|Description|
@@ -62,4 +62,24 @@ The following is a JSON representation of the resource.
   "sensitivityLabelId": "String (identifier)"
 }
 ```
+
+## Error cases
+
+If a user tries to set a label that is not in scope for the user, they will receive a 403 (forbidden) with the usual response.
+If labels are mandatory and the user tries to save a roster with no label specified (and no default label available), this will also result in a 403.
+``` json
+HTTP/1.1 403 Forbidden
+{
+    "error": {
+        "code": "Forbidden",
+        "message": "You do not have the required permissions to access this item.",
+        "innerError": {
+            "date": "2021-11-10T21:52:38",
+            "request-id": "c7130de0-8e9e-4dc8-808f-72d0cb821b77",
+            "client-request-id": "6fe2e8bf-db35-a1c3-17b3-8430b9e75aa0"
+        }
+    }
+}
+```
+Note: While a user might not be able to set a given label, reading the label is allowed regardless.
 
