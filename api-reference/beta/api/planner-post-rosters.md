@@ -119,4 +119,4 @@ Content-Type: application/json
 
 If labels are mandatory for the user, and the created roster would have no sensitivity label, the request will fail, and the **code** property of the error resource type will be "SensitivityLabelsAreMandatory".
 
-If the label proposed disallows the addition of guest users, the request will fail, and the **code** property on the error resource type will be "AddingGuestUsersProhibitedByLabel"
+If the roster would be created with guest members initially added to the roster, but the proposed sensitivityLabel disallows the addition of guest users, the request will fail, and the **code** property on the error resource type will be "AddingGuestUsersProhibitedByLabel"
