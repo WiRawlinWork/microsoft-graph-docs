@@ -45,13 +45,30 @@ Namespace: microsoft.graph.externalConnectors
 
 ### connectionState values
 
-|Member
+| Member
 |:--------------
 | draft
 | ready
 | obsolete
 | limitExceeded
 | unknownFutureValue
+
+### contentExperienceType values
+| Member
+|:--------------
+| search
+| compliance
+| unknownFutureValue
+
+### externalActivityType values
+
+| Member             |
+|:-------------------|
+| viewed             |
+| modified           |
+| created            |
+| commented          |
+| unknownFutureValue |
 
 ### externalGroupMemberType values
 
@@ -60,7 +77,6 @@ Namespace: microsoft.graph.externalConnectors
 | user
 | group
 | unknownFutureValue
-
 
 ### externalItemContentType values
 
@@ -77,6 +93,24 @@ Namespace: microsoft.graph.externalConnectors
 | azureActiveDirectory
 | external
 
+### identityType values
+
+| Member
+|:--------------
+| user
+| group
+| externalGroup
+| unknownFutureValue
+
+### importanceScore values
+
+| Member
+|:--------------
+| low
+| medium
+| high
+| veryHigh
+| unknownFutureValue
 
 ### label values
 
@@ -112,7 +146,7 @@ Namespace: microsoft.graph.externalConnectors
 | dateTimeCollection
 | unknownFutureValue
 
-### ruleOperation values 
+### ruleOperation values
 
 |Member|
 |:---|
@@ -132,5 +166,3 @@ Namespace: microsoft.graph.externalConnectors
   "namespace": "microsoft.graph.externalConnectors"
 }
 -->
-
-

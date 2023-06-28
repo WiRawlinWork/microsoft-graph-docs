@@ -4,18 +4,26 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestParameters := &msgraphsdk.UnifiedRoleAssignmentScheduleRequestRequestBuilderGetQueryParameters{
-	Select: "principalId,action,roleDefinitionId",
-	Expand: "roleDefinition,activatedUsing,principal,targetSchedule",
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-sdk-go"
+	  graphrolemanagement "github.com/microsoftgraph/msgraph-sdk-go/rolemanagement"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestParameters := &graphrolemanagement.RoleManagementDirectoryRoleAssignmentScheduleRequestItemRequestBuilderGetQueryParameters{
+	Select: [] string {"principalId","action","roleDefinitionId"},
+	Expand: [] string {"roleDefinition","activatedUsing","principal","targetSchedule"},
 }
-options := &msgraphsdk.UnifiedRoleAssignmentScheduleRequestRequestBuilderGetRequestConfiguration{
+configuration := &graphrolemanagement.RoleManagementDirectoryRoleAssignmentScheduleRequestItemRequestBuilderGetRequestConfiguration{
 	QueryParameters: requestParameters,
 }
-unifiedRoleAssignmentScheduleRequestId := "unifiedRoleAssignmentScheduleRequest-id"
-result, err := graphClient.RoleManagement().Directory().RoleAssignmentScheduleRequestsById(&unifiedRoleAssignmentScheduleRequestId).GetWithRequestConfigurationAndResponseHandler(options, nil)
+
+result, err := graphClient.RoleManagement().Directory().RoleAssignmentScheduleRequests().ByRoleAssignmentScheduleRequestId("unifiedRoleAssignmentScheduleRequest-id").Get(context.Background(), configuration)
 
 
 ```

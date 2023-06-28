@@ -17,6 +17,7 @@ Generic representation of a team template definition for a team with a specific 
 
 Inherits from [entity](../resources/entity.md).
 
+
 ## Methods
 |Method|Return type|Description|
 |:---|:---|:---|
@@ -58,22 +59,22 @@ The following is a JSON representation of the resource.
 ``` json
 {
   "@odata.type": "#microsoft.graph.teamTemplateDefinition",
-  "id": "String (identifier)",
-  "parentTemplateId": "String",
-  "displayName": "String",
-  "languageTag": "String",
   "audience": "String",
+  "categories": [
+    "String"
+  ],
   "description": "String",
-  "shortDescription": "String",
+  "displayName": "String",
   "iconUrl": "String",
+  "id": "String (identifier)",
+  "languageTag": "String",
   "lastModifiedDateTime": "String (timestamp)",
   "lastModifiedBy": {
     "@odata.type": "microsoft.graph.identitySet"
   },
-  "publisherName": "String",
-  "categories": [
-    "String"
-  ]
+  "parentTemplateId": "String",
+  "publisherName": "String", 
+  "shortDescription": "String"
 }
 ```
 ## See also

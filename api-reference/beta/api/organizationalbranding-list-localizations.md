@@ -19,9 +19,9 @@ One of the following permissions is required to call this API. To learn more, in
 
 | Permission type                        | Permissions (from least to most privileged) |
 |:---------------------------------------|:--------------------------------------------|
-| Delegated (work or school account)     | User.Read, Organization.Read.All, User.ReadBasic.All, User.Read.All |
+| Delegated (work or school account)     | User.Read, Organization.Read.All, User.Read.All |
 | Delegated (personal Microsoft account) | Not supported. |
-| Application                            | Not supported. |
+| Application                            | Organization.Read.All |
 
 ## HTTP request
 
@@ -63,16 +63,13 @@ The following is an example of the request.
 ```msgraph-interactive
 GET https://graph.microsoft.com/beta/organization/84841066-274d-4ec0-a5c1-276be684bdd3/branding/localizations/
 ```
+
 # [C#](#tab/csharp)
 [!INCLUDE [sample-code](../includes/snippets/csharp/list-organizationalbrandinglocalization-csharp-snippets.md)]
 [!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
 # [JavaScript](#tab/javascript)
 [!INCLUDE [sample-code](../includes/snippets/javascript/list-organizationalbrandinglocalization-javascript-snippets.md)]
-[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
-
-# [Objective-C](#tab/objc)
-[!INCLUDE [sample-code](../includes/snippets/objc/list-organizationalbrandinglocalization-objc-snippets.md)]
 [!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
 # [Java](#tab/java)
@@ -87,8 +84,15 @@ GET https://graph.microsoft.com/beta/organization/84841066-274d-4ec0-a5c1-276be6
 [!INCLUDE [sample-code](../includes/snippets/powershell/list-organizationalbrandinglocalization-powershell-snippets.md)]
 [!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
----
+# [PHP](#tab/php)
+[!INCLUDE [sample-code](../includes/snippets/php/list-organizationalbrandinglocalization-php-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
+# [Python](#tab/python)
+[!INCLUDE [sample-code](../includes/snippets/python/list-organizationalbrandinglocalization-python-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
+
+---
 
 ### Response
 <!-- {
@@ -115,9 +119,15 @@ Content-Type: application/json
                 "aadcdn.msftauthimages.net",
                 "aadcdn.msauthimages.net"
             ],
+            "contentCustomization": {
+              "attributeCollectionRelativeUrl": "dbd5a2dd-dt17xdjgu8kxc14xcav-rckknamct7yytiih-vm-ksm/logintenantbranding/1033/attributecollection?ts=638151133931615483",
+              "attributeCollection": []
+             },            
             "customAccountResetCredentialsUrl": null,
             "customCannotAccessYourAccountText": null,
             "customCannotAccessYourAccountUrl": null,
+            "customCSS": null,
+            "customCSSRelativetUrl": null,
             "customForgotMyPasswordText": null,
             "customPrivacyAndCookiesText": null,
             "customPrivacyAndCookiesUrl": null,
@@ -126,9 +136,16 @@ Content-Type: application/json
             "customResetItNowText": null,
             "faviconRelativeUrl": null,
             "headerBackgroundColor": null,
+            "headerLogoRelativeUrl": null,
             "signInPageText": "Contoso",
             "squareLogoRelativeUrl": "c1c6b6c8-urr-dzbkz44n5kuo9kzl1kziuujjcdqonoe2owyacso/logintenantbranding/0/tilelogo?ts=637535563832888580",
+            "squareLogoDarkRelativeUrl": null,
             "usernameHintText": " ",
+            "loginPageLayoutConfiguration": {
+              "layoutTemplateType": "default",
+              "isHeaderShown": false,
+              "isFooterShown": true
+             },
             "loginPageTextVisibilitySettings": {
               "hideCannotAccessYourAccount": false,
               "hideForgotMyPassword": false,
@@ -144,9 +161,15 @@ Content-Type: application/json
             "backgroundImageRelativeUrl": null,
             "bannerLogoRelativeUrl": null,
             "cdnList": [],
+            "contentCustomization": {
+              "attributeCollectionRelativeUrl": "dbd5a2dd-dt17xdjgu8kxc14xcav-rckknamct7yytiih-vm-ksm/logintenantbranding/1033/attributecollection?ts=638151133931615483",
+              "attributeCollection": []
+             },             
             "customAccountResetCredentialsUrl": null,
             "customCannotAccessYourAccountText": null,
             "customCannotAccessYourAccountUrl": null,
+            "customCSS": null,
+            "customCSSRelativetUrl": null,
             "customForgotMyPasswordText": null,
             "customPrivacyAndCookiesText": null,
             "customPrivacyAndCookiesUrl": null,
@@ -155,9 +178,16 @@ Content-Type: application/json
             "customResetItNowText": null,
             "faviconRelativeUrl": null,
             "headerBackgroundColor": null,
+            "headerLogoRelativeUrl": null,
             "signInPageText": "Contoso",
             "squareLogoRelativeUrl": "c1c6b6c8-urr-dzbkz44n5kuo9kzl1kziuujjcdqonoe2owyacso/logintenantbranding/0/tilelogo?ts=637535563832888580",
+            "squareLogoDarkRelativeUrl": null,
             "usernameHintText": " ",
+            "loginPageLayoutConfiguration": {
+              "layoutTemplateType": "default",
+              "isHeaderShown": false,
+              "isFooterShown": true
+             },
             "loginPageTextVisibilitySettings": {
               "hideCannotAccessYourAccount": false,
               "hideForgotMyPassword": false,

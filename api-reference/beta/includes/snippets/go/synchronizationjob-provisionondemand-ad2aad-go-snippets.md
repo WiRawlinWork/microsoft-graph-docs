@@ -4,25 +4,43 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewParametersRequestBody()
-requestBody.SetParameters( []SynchronizationJobApplicationParameters {
-	msgraphsdk.NewSynchronizationJobApplicationParameters(),
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphserviceprincipals "github.com/microsoftgraph/msgraph-beta-sdk-go/serviceprincipals"
+	  graphmodels "github.com/microsoftgraph/msgraph-beta-sdk-go/models"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphserviceprincipals.NewProvisionOnDemandPostRequestBody()
+
+
+synchronizationJobApplicationParameters := graphmodels.NewSynchronizationJobApplicationParameters()
 ruleId := "6c409270-f78a-4bc6-af23-7cf3ab6482fe"
-	SetRuleId(&ruleId)
-	SetSubjects( []SynchronizationJobSubject {
-		msgraphsdk.NewSynchronizationJobSubject(),
+synchronizationJobApplicationParameters.SetRuleId(&ruleId) 
+
+
+synchronizationJobSubject := graphmodels.NewSynchronizationJobSubject()
 objectId := "CN=AdeleV,CN=Users,DC=corp,DC=chicago,DC=com"
-		SetObjectId(&objectId)
+synchronizationJobSubject.SetObjectId(&objectId) 
 objectTypeName := "user"
-		SetObjectTypeName(&objectTypeName)
-	}
+synchronizationJobSubject.SetObjectTypeName(&objectTypeName) 
+
+subjects := []graphmodels.SynchronizationJobSubjectable {
+	synchronizationJobSubject,
 }
-servicePrincipalId := "servicePrincipal-id"
-synchronizationJobId := "synchronizationJob-id"
-result, err := graphClient.ServicePrincipalsById(&servicePrincipalId).Synchronization().JobsById(&synchronizationJobId).ProvisionOnDemand(servicePrincipal-id, synchronizationJob-id).Post(requestBody)
+synchronizationJobApplicationParameters.SetSubjects(subjects)
+
+parameters := []graphmodels.SynchronizationJobApplicationParametersable {
+	synchronizationJobApplicationParameters,
+}
+requestBody.SetParameters(parameters)
+
+result, err := graphClient.ServicePrincipals().ByServicePrincipalId("servicePrincipal-id").Synchronization().Jobs().ByJobId("synchronizationJob-id").ProvisionOnDemand().Post(context.Background(), requestBody, nil)
 
 
 ```

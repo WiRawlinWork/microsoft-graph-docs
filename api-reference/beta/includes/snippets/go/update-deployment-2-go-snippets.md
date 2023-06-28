@@ -4,31 +4,38 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewDeployment()
-settings := msgraphsdk.NewDeploymentSettings()
-requestBody.SetSettings(settings)
-monitoring := msgraphsdk.NewMonitoringSettings()
-settings.SetMonitoring(monitoring)
-monitoring.SetMonitoringRules( []MonitoringRule {
-	msgraphsdk.NewMonitoringRule(),
-signal := "rollback"
-	SetSignal(&signal)
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphmodelswindowsupdates "github.com/microsoftgraph/msgraph-beta-sdk-go/models/windowsupdates"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphmodelswindowsupdates.NewDeployment()
+settings := graphmodelswindowsupdates.NewDeploymentSettings()
+monitoring := graphmodelswindowsupdates.NewMonitoringSettings()
+
+
+monitoringRule := graphmodelswindowsupdates.NewMonitoringRule()
+signal := graphmodels.ROLLBACK_MONITORINGSIGNAL 
+monitoringRule.SetSignal(&signal) 
 threshold := int32(5)
-	SetThreshold(&threshold)
-action := "pauseDeployment"
-	SetAction(&action)
+monitoringRule.SetThreshold(&threshold) 
+action := graphmodels.PAUSEDEPLOYMENT_MONITORINGACTION 
+monitoringRule.SetAction(&action) 
+
+monitoringRules := []graphmodelswindowsupdates.MonitoringRuleable {
+	monitoringRule,
 }
-settings.SetAdditionalData(map[string]interface{}{
-	"@odata.type": "microsoft.graph.windowsUpdates.windowsDeploymentSettings",
-}
-requestBody.SetAdditionalData(map[string]interface{}{
-	"@odata.type": "#microsoft.graph.windowsUpdates.deployment",
-}
-deploymentId := "deployment-id"
-graphClient.Admin().Windows().Updates().DeploymentsById(&deploymentId).Patch(requestBody)
+monitoring.SetMonitoringRules(monitoringRules)
+settings.SetMonitoring(monitoring)
+requestBody.SetSettings(settings)
+
+result, err := graphClient.Admin().Windows().Updates().Deployments().ByDeploymentId("deployment-id").Patch(context.Background(), requestBody, nil)
 
 
 ```

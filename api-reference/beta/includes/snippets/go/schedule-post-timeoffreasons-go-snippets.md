@@ -4,18 +4,26 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewTimeOffReason()
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphmodels "github.com/microsoftgraph/msgraph-beta-sdk-go/models"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphmodels.NewTimeOffReason()
 displayName := "Vacation"
-requestBody.SetDisplayName(&displayName)
-iconType := "plane"
-requestBody.SetIconType(&iconType)
+requestBody.SetDisplayName(&displayName) 
+iconType := graphmodels.PLANE_TIMEOFFREASONICONTYPE 
+requestBody.SetIconType(&iconType) 
 isActive := true
-requestBody.SetIsActive(&isActive)
-teamId := "team-id"
-result, err := graphClient.TeamsById(&teamId).Schedule().TimeOffReasons().Post(requestBody)
+requestBody.SetIsActive(&isActive) 
+
+result, err := graphClient.Teams().ByTeamId("team-id").Schedule().TimeOffReasons().Post(context.Background(), requestBody, nil)
 
 
 ```

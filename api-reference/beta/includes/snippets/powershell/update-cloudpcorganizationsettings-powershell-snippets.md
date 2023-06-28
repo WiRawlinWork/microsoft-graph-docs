@@ -8,10 +8,11 @@ Import-Module Microsoft.Graph.DeviceManagement.Administration
 
 $params = @{
 	"@odata.type" = "#microsoft.graph.cloudPcOrganizationSettings"
-	UserAccountType = "standardUser"
-	OsVersion = "windows11"
-	WindowsSettings = @{
-		Language = "en-US"
+	enableMEMAutoEnroll = $true
+	osVersion = "windows11"
+	userAccountType = "standardUser"
+	windowsSettings = @{
+		language = "en-US"
 	}
 }
 

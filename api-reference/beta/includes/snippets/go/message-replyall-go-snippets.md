@@ -4,25 +4,37 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.New()
-message := msgraphsdk.NewMessage()
-requestBody.SetMessage(message)
-message.SetAttachments( []Attachment {
-	msgraphsdk.NewAttachment(),
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphusers "github.com/microsoftgraph/msgraph-beta-sdk-go/users"
+	  graphmodels "github.com/microsoftgraph/msgraph-beta-sdk-go/models"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphusers.NewItemReplyAllPostRequestBody()
+message := graphmodels.NewMessage()
+
+
+attachment := graphmodels.NewFileAttachment()
 name := "guidelines.txt"
-	SetName(&name)
-	SetAdditionalData(map[string]interface{}{
-		"@odata.type": "#microsoft.graph.fileAttachment",
-		"contentBytes": "bWFjIGFuZCBjaGVlc2UgdG9kYXk=",
-	}
+attachment.SetName(&name) 
+contentBytes := []byte("bWFjIGFuZCBjaGVlc2UgdG9kYXk=")
+attachment.SetContentBytes(&contentBytes) 
+
+attachments := []graphmodels.Attachmentable {
+	attachment,
 }
+message.SetAttachments(attachments)
+requestBody.SetMessage(message)
 comment := "Please take a look at the attached guidelines before you decide on the name."
-requestBody.SetComment(&comment)
-messageId := "message-id"
-graphClient.Me().MessagesById(&messageId).ReplyAll(message-id).Post(requestBody)
+requestBody.SetComment(&comment) 
+
+graphClient.Me().Messages().ByMessageId("message-id").ReplyAll().Post(context.Background(), requestBody, nil)
 
 
 ```

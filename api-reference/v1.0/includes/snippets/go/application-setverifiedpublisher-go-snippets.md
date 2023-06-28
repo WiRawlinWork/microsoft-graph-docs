@@ -4,14 +4,22 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewVerifiedPublisherIdRequestBody()
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-sdk-go"
+	  graphapplications "github.com/microsoftgraph/msgraph-sdk-go/applications"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphapplications.NewSetVerifiedPublisherPostRequestBody()
 verifiedPublisherId := "1234567"
-requestBody.SetVerifiedPublisherId(&verifiedPublisherId)
-applicationId := "application-id"
-graphClient.ApplicationsById(&applicationId).SetVerifiedPublisher(application-id).Post(requestBody)
+requestBody.SetVerifiedPublisherId(&verifiedPublisherId) 
+
+graphClient.Applications().ByApplicationId("application-id").SetVerifiedPublisher().Post(context.Background(), requestBody, nil)
 
 
 ```

@@ -4,17 +4,28 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestParameters := &msgraphsdk.ContentRequestBuilderGetQueryParameters{
-	Format: "%7Bformat%7D",
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphdrives "github.com/microsoftgraph/msgraph-beta-sdk-go/drives"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+
+requestFormat := "{format}"
+
+requestParameters := &graphdrives.DriveItemItemItemContentRequestBuilderGetQueryParameters{
+	Format: &requestFormat,
 }
-options := &msgraphsdk.ContentRequestBuilderGetRequestConfiguration{
+configuration := &graphdrives.DriveItemItemItemContentRequestBuilderGetRequestConfiguration{
 	QueryParameters: requestParameters,
 }
-driveItemId := "driveItem-id"
-graphClient.Drive().ItemsById(&driveItemId).Content().GetWithRequestConfigurationAndResponseHandler(options, nil)
+
+graphClient.Drives().ByDriveId("drive-id").Items().ByItemId("driveItem-id").Content().Get(context.Background(), configuration)
 
 
 ```

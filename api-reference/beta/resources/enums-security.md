@@ -1,99 +1,146 @@
 ---
 title: "Security enum values"
-description: "Microsoft Graph security namespace enumeration values."
-author: "sseth"
+description: "Microsoft Graph security subnamespace enumeration values"
+doc_type: enumPageType
 ms.localizationpriority: medium
-ms.prod: "compliance"
-doc_type: enumTypes
+ms.prod: "security"
+author: "BenAlfasi"
 ---
 
 # Security enum values
 
 Namespace: microsoft.graph.security
 
-### actionAfterRetentionPeriod values 
+### contentFormat values
 
+| Member             |
+| :----------------- |
+| text               |
+| html               |
+| markdown           |
+| unknownFutureValue |
 
+### detectionStatus values
 
-|Member|
-|:---|
-|none|
-|delete|
-|startDispositionReview|
-|unknownFutureValue|
+| Member
+|:--------------
+| detected
+| blocked
+| prevented
+| unknownFutureValue
 
-### behaviorDuringRetentionPeriod values 
+### actionAfterRetentionPeriod values
 
+| Member                 |
+| :--------------------- |
+| none                   |
+| delete                 |
+| startDispositionReview |
+| unknownFutureValue     |
 
+### behaviorDuringRetentionPeriod values
 
-|Member|
-|:---|
-|doNotRetain|
-|retain|
-|retainAsRecord|
-|retainAsRegulatoryRecord|
-|unknownFutureValue|
+| Member                   |
+| :----------------------- |
+| doNotRetain              |
+| retain                   |
+| retainAsRecord           |
+| retainAsRegulatoryRecord |
+| unknownFutureValue       |
 
+### defaultRecordBehavior values
 
-### defaultRecordBehavior values 
+| Member             |
+| :----------------- |
+| startLocked        |
+| startUnlocked      |
+| unknownFutureValue |
 
+### eventPropagationStatus values
 
+| Member             |
+| :----------------- |
+| none               |
+| inProcessing       |
+| failed             |
+| success            |
+| unknownFutureValue |
 
-|Member|
-|:---|
-|startLocked|
-|startUnlocked|
-|unknownFutureValue|
+### eventStatusType values
 
+| Member             |
+| :----------------- |
+| pending            |
+| error              |
+| success            |
+| notAvaliable       |
+| unknownFutureValue |
 
-### eventPropagationStatus values 
+### hostReputationClassification values
 
+| Member             |
+| :----------------- |
+| unknown            |
+| neutral            |
+| suspicious         |
+| malicious          |
+| unknownFutureValue |
 
+### hostReputationRuleSeverity values
 
-|Member|
-|:---|
-|none|
-|inProcessing|
-|failed|
-|success|
-|unknownFutureValue|
+| Member             |
+| :----------------- |
+| unknown            |
+| low                |
+| medium             |
+| high               |
+| unknownFutureValue |
 
-### eventStatusType values 
+### indicatorSource values
 
+| Member             |
+| :----------------- |
+| microsoft          |
+| osint              |
+| public             |
+| unknownFutureValue |
 
+### intelligenceProfileKind values
 
-|Member|
-|:---|
-|pending|
-|error|
-|success|
-|notAvaliable|
-|unknownFutureValue|
+| Member             |
+| :----------------- |
+| actor              |
+| tool               |
+| unknownFutureValue |
 
-### queryType values 
+### queryType values
 
+| Member             |
+| :----------------- |
+| files              |
+| messages           |
+| unknownFutureValue |
 
+### retentionTrigger values
 
-|Member|
-|:---|
-|files|
-|messages|
-|unknownFutureValue|
+| Member             |
+| :----------------- |
+| dateLabeled        |
+| dateCreated        |
+| dateModified       |
+| dateOfEvent        |
+| unknownFutureValue |
 
+### vulnerabilitySeverity values
 
-
-### retentionTrigger values 
-
-
-
-|Member|
-|:---|
-|dateLabeled|
-|dateCreated|
-|dateModified|
-|dateOfEvent|
-|unknownFutureValue|
-
+| Member             |
+| :----------------- |
+| none               |
+| low                |
+| medium             |
+| high               |
+| critical           |
+| unknownFutureValue |
 
 <!--
 {

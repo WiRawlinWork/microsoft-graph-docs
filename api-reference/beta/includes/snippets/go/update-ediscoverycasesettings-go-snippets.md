@@ -4,30 +4,26 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewEdiscoveryCaseSettings()
-redundancyDetection := msgraphsdk.NewRedundancyDetectionSettings()
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphmodelssecurity "github.com/microsoftgraph/msgraph-beta-sdk-go/models/security"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphmodelssecurity.NewEdiscoveryCaseSettings()
+redundancyDetection := graphmodelssecurity.NewRedundancyDetectionSettings()
 requestBody.SetRedundancyDetection(redundancyDetection)
-redundancyDetection.SetAdditionalData(map[string]interface{}{
-	"@odata.type": "microsoft.graph.security.redundancyDetectionSettings",
-}
-topicModeling := msgraphsdk.NewTopicModelingSettings()
+topicModeling := graphmodelssecurity.NewTopicModelingSettings()
 requestBody.SetTopicModeling(topicModeling)
-topicModeling.SetAdditionalData(map[string]interface{}{
-	"@odata.type": "microsoft.graph.security.topicModelingSettings",
-}
-ocr := msgraphsdk.NewOcrSettings()
+ocr := graphmodelssecurity.NewOcrSettings()
 requestBody.SetOcr(ocr)
-ocr.SetAdditionalData(map[string]interface{}{
-	"@odata.type": "microsoft.graph.security.ocrSettings",
-}
-requestBody.SetAdditionalData(map[string]interface{}{
-	"@odata.type": "#microsoft.graph.security.ediscoveryCaseSettings",
-}
-ediscoveryCaseId := "ediscoveryCase-id"
-graphClient.Security().Cases().EdiscoveryCasesById(&ediscoveryCaseId).Settings().Patch(requestBody)
+
+result, err := graphClient.Security().Cases().EdiscoveryCases().ByEdiscoveryCaseId("ediscoveryCase-id").Settings().Patch(context.Background(), requestBody, nil)
 
 
 ```

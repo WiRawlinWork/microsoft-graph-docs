@@ -4,16 +4,25 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestParameters := &msgraphsdk.DeltaRequestBuilderGetQueryParameters{
-	Select: "displayName,jobTitle,mobilePhone",
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphusers "github.com/microsoftgraph/msgraph-beta-sdk-go/users"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestParameters := &graphusers.UsersDelta()RequestBuilderGetQueryParameters{
+	Select: [] string {"displayName","jobTitle","mobilePhone"},
 }
-options := &msgraphsdk.DeltaRequestBuilderGetRequestConfiguration{
+configuration := &graphusers.UsersDelta()RequestBuilderGetRequestConfiguration{
 	QueryParameters: requestParameters,
 }
-result, err := graphClient.Users().Delta()().GetWithRequestConfigurationAndResponseHandler(options, nil)
+
+result, err := graphClient.Users().Delta().Get(context.Background(), configuration)
 
 
 ```

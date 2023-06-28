@@ -1,7 +1,7 @@
 ---
 title: "groupLifecyclePolicy: addGroup"
 description: "Adds a group to a lifecycle policy."
-author: "psaffaie"
+author: "Jordanndahl"
 ms.localizationpriority: medium
 ms.prod: "groups"
 doc_type: apiPageType
@@ -22,7 +22,7 @@ One of the following permissions is required to call this API. To learn more, in
 | Permission type                        | Permissions (from least to most privileged) |
 | :------------------------------------- | :------------------------------------------ |
 | Delegated (work or school account)     | Directory.ReadWrite.All                     |
-| Delegated (personal Microsoft account) | Not supported                               |
+| Delegated (personal Microsoft account) | Not supported.                              |
 | Application                            | Directory.ReadWrite.All                     |
 
 ## HTTP request
@@ -58,7 +58,9 @@ If successful, this method returns `200 OK` response code. If the group is added
 
 ## Example
 
-#### Request
+### Request
+
+The following is an example of a request.
 
 <!-- {
   "blockType": "ignored",
@@ -74,7 +76,9 @@ Content-type: application/json
 }
 ```
 
-#### Response
+### Response
+
+The following is an example of the response.
 
 <!-- { "blockType": "ignored" } -->
 

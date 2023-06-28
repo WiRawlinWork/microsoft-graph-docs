@@ -4,12 +4,18 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-directoryRoleId := "directoryRole-id"
-directoryObjectId := "directoryObject-id"
-graphClient.DirectoryRolesById(&directoryRoleId).MembersById(&directoryObjectId).$ref().Delete()
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+
+graphClient.DirectoryRoles().ByDirectoryRoleId("directoryRole-id").Members().ByMemberId("directoryObject-id").Ref().Delete(context.Background(), nil)
 
 
 ```

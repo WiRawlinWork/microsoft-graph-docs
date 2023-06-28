@@ -4,21 +4,30 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestParameters := &msgraphsdk.EventRequestBuilderGetQueryParameters{
-	Select: "subject,body,bodyPreview,organizer,attendees,start,end,location,hideAttendees",
+import (
+	  "context"
+	  abstractions "github.com/microsoft/kiota-abstractions-go"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-sdk-go"
+	  graphusers "github.com/microsoftgraph/msgraph-sdk-go/users"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+headers := abstractions.NewRequestHeaders()
+headers.Add("Prefer", "outlook.timezone=\"Pacific Standard Time\"")
+
+requestParameters := &graphusers.ItemEventItemRequestBuilderGetQueryParameters{
+	Select: [] string {"subject","body","bodyPreview","organizer","attendees","start","end","location","hideAttendees"},
 }
-headers := map[string]string{
-	"Prefer": "outlook.timezone="Pacific Standard Time""
-}
-options := &msgraphsdk.EventRequestBuilderGetRequestConfiguration{
-	QueryParameters: requestParameters,
+configuration := &graphusers.ItemEventItemRequestBuilderGetRequestConfiguration{
 	Headers: headers,
+	QueryParameters: requestParameters,
 }
-eventId := "event-id"
-result, err := graphClient.Me().EventsById(&eventId).GetWithRequestConfigurationAndResponseHandler(options, nil)
+
+result, err := graphClient.Me().Events().ByEventId("event-id").Get(context.Background(), configuration)
 
 
 ```

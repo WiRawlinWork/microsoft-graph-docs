@@ -4,13 +4,22 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewStore()
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphmodelstermstore "github.com/microsoftgraph/msgraph-beta-sdk-go/models/termstore"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphmodelstermstore.NewStore()
 defaultLanguageTag := "en-US"
-requestBody.SetDefaultLanguageTag(&defaultLanguageTag)
-graphClient.TermStore().Patch(requestBody)
+requestBody.SetDefaultLanguageTag(&defaultLanguageTag) 
+
+result, err := graphClient.TermStore().Patch(context.Background(), requestBody, nil)
 
 
 ```

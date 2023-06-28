@@ -4,17 +4,25 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestParameters := &msgraphsdk.UnifiedRoleManagementPolicyRequestBuilderGetQueryParameters{
-	Expand: "effectiveRules,rules",
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-sdk-go"
+	  graphpolicies "github.com/microsoftgraph/msgraph-sdk-go/policies"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestParameters := &graphpolicies.PoliciesRoleManagementPolicieItemRequestBuilderGetQueryParameters{
+	Expand: [] string {"effectiveRules","rules"},
 }
-options := &msgraphsdk.UnifiedRoleManagementPolicyRequestBuilderGetRequestConfiguration{
+configuration := &graphpolicies.PoliciesRoleManagementPolicieItemRequestBuilderGetRequestConfiguration{
 	QueryParameters: requestParameters,
 }
-unifiedRoleManagementPolicyId := "unifiedRoleManagementPolicy-id"
-result, err := graphClient.Policies().RoleManagementPoliciesById(&unifiedRoleManagementPolicyId).GetWithRequestConfigurationAndResponseHandler(options, nil)
+
+result, err := graphClient.Policies().RoleManagementPolicies().ByRoleManagementPolicieId("unifiedRoleManagementPolicy-id").Get(context.Background(), configuration)
 
 
 ```

@@ -4,30 +4,45 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewMeetingRegistration()
+import (
+	  "context"
+	  "time"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphmodels "github.com/microsoftgraph/msgraph-beta-sdk-go/models"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphmodels.NewMeetingRegistration()
 subject := "Microsoft Ignite: Day 1"
-requestBody.SetSubject(&subject)
-startDateTime, err := time.Parse(time.RFC3339, "2021-11-02T08:00:00-08:00")
-requestBody.SetStartDateTime(&startDateTime)
-endDateTime, err := time.Parse(time.RFC3339, "2021-11-02T15:45:00-08:00")
-requestBody.SetEndDateTime(&endDateTime)
-requestBody.SetSpeakers( []MeetingSpeaker {
-	msgraphsdk.NewMeetingSpeaker(),
+requestBody.SetSubject(&subject) 
+startDateTime , err := time.Parse(time.RFC3339, "2021-11-02T08:00:00-08:00")
+requestBody.SetStartDateTime(&startDateTime) 
+endDateTime , err := time.Parse(time.RFC3339, "2021-11-02T15:45:00-08:00")
+requestBody.SetEndDateTime(&endDateTime) 
+
+
+meetingSpeaker := graphmodels.NewMeetingSpeaker()
 displayName := "Henry Ross"
-	SetDisplayName(&displayName)
+meetingSpeaker.SetDisplayName(&displayName) 
 bio := "Chairman and Chief Executive Officer"
-	SetBio(&bio)
-	msgraphsdk.NewMeetingSpeaker(),
+meetingSpeaker.SetBio(&bio) 
+meetingSpeaker1 := graphmodels.NewMeetingSpeaker()
 displayName := "Fred Ryan"
-	SetDisplayName(&displayName)
+meetingSpeaker1.SetDisplayName(&displayName) 
 bio := "CVP"
-	SetBio(&bio)
+meetingSpeaker1.SetBio(&bio) 
+
+speakers := []graphmodels.MeetingSpeakerable {
+	meetingSpeaker,
+	meetingSpeaker1,
 }
-onlineMeetingId := "onlineMeeting-id"
-graphClient.Me().OnlineMeetingsById(&onlineMeetingId).Registration().Patch(requestBody)
+requestBody.SetSpeakers(speakers)
+
+result, err := graphClient.Me().OnlineMeetings().ByOnlineMeetingId("onlineMeeting-id").Registration().Patch(context.Background(), requestBody, nil)
 
 
 ```

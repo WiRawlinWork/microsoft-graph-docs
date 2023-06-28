@@ -4,18 +4,26 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.New()
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphusers "github.com/microsoftgraph/msgraph-beta-sdk-go/users"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphusers.NewItemCopyToNotebookPostRequestBody()
 id := "id-value"
-requestBody.SetId(&id)
+requestBody.SetId(&id) 
 groupId := "groupId-value"
-requestBody.SetGroupId(&groupId)
+requestBody.SetGroupId(&groupId) 
 renameAs := "renameAs-value"
-requestBody.SetRenameAs(&renameAs)
-onenoteSectionId := "onenoteSection-id"
-result, err := graphClient.Me().Onenote().SectionsById(&onenoteSectionId).CopyToNotebook(onenoteSection-id).Post(requestBody)
+requestBody.SetRenameAs(&renameAs) 
+
+result, err := graphClient.Me().Onenote().Sections().BySectionId("onenoteSection-id").CopyToNotebook().Post(context.Background(), requestBody, nil)
 
 
 ```

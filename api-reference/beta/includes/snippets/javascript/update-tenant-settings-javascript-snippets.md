@@ -10,10 +10,11 @@ const options = {
 
 const client = Client.init(options);
 
-const settings = {
+const sharepointSettings = {
     deletedUserPersonalSiteRetentionPeriodInDays: 365,
     excludedFileExtensionsForSyncApp: ['.mp3'],
     imageTaggingOption: 'enhanced',
+    isLegacyAuthProtocolsEnabled: true,
     isSitesStorageLimitAutomatic: false,
     isSyncButtonHiddenOnPersonalSite: false,
     isUnmanagedSyncAppForTenantRestricted: false,
@@ -22,6 +23,6 @@ const settings = {
 
 await client.api('/admin/sharepoint/settings')
 	.version('beta')
-	.update(settings);
+	.update(sharepointSettings);
 
 ```

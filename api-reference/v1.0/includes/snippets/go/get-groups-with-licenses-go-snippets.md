@@ -4,17 +4,30 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestParameters := &msgraphsdk.GroupsRequestBuilderGetQueryParameters{
-	Select: "id,assignedLicenses",
-	Filter: "assignedLicenses/any()",
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-sdk-go"
+	  graphgroups "github.com/microsoftgraph/msgraph-sdk-go/groups"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+
+requestFilter := "assignedLicenses/any()"
+
+requestParameters := &graphgroups.GroupsRequestBuilderGetQueryParameters{
+	Select: [] string {"id","assignedLicenses"},
+	Filter: &requestFilter,
+	Expand: [] string {"members($select=id,displayName)"},
 }
-options := &msgraphsdk.GroupsRequestBuilderGetRequestConfiguration{
+configuration := &graphgroups.GroupsRequestBuilderGetRequestConfiguration{
 	QueryParameters: requestParameters,
 }
-result, err := graphClient.Groups().GetWithRequestConfigurationAndResponseHandler(options, nil)
+
+result, err := graphClient.Groups().Get(context.Background(), configuration)
 
 
 ```

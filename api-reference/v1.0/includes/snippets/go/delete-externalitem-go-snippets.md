@@ -4,12 +4,18 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-externalConnectionId := "externalConnection-id"
-externalItemId := "externalItem-id"
-graphClient.External().ConnectionsById(&externalConnectionId).ItemsById(&externalItemId).Delete()
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-sdk-go"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+
+graphClient.External().Connections().ByConnectionId("externalConnection-id").Items().ByItemId("externalItem-id").Delete(context.Background(), nil)
 
 
 ```

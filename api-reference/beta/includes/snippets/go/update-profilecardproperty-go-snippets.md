@@ -4,23 +4,40 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewProfileCardProperty()
-requestBody.SetAnnotations( []ProfileCardAnnotation {
-	msgraphsdk.NewProfileCardAnnotation(),
-	SetLocalizations( []DisplayNameLocalization {
-		msgraphsdk.NewDisplayNameLocalization(),
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphmodels "github.com/microsoftgraph/msgraph-beta-sdk-go/models"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphmodels.NewProfileCardProperty()
+
+
+profileCardAnnotation := graphmodels.NewProfileCardAnnotation()
+
+
+displayNameLocalization := graphmodels.NewDisplayNameLocalization()
 languageTag := "no-NB"
-		SetLanguageTag(&languageTag)
+displayNameLocalization.SetLanguageTag(&languageTag) 
 displayName := "Kostnads Senter"
-		SetDisplayName(&displayName)
-	}
+displayNameLocalization.SetDisplayName(&displayName) 
+
+localizations := []graphmodels.DisplayNameLocalizationable {
+	displayNameLocalization,
 }
-organizationId := "organization-id"
-profileCardPropertyId := "profileCardProperty-id"
-graphClient.OrganizationById(&organizationId).Settings().ProfileCardPropertiesById(&profileCardPropertyId).Patch(requestBody)
+profileCardAnnotation.SetLocalizations(localizations)
+
+annotations := []graphmodels.ProfileCardAnnotationable {
+	profileCardAnnotation,
+}
+requestBody.SetAnnotations(annotations)
+
+result, err := graphClient.Organization().ByOrganization().Id("organization-id").Settings().ProfileCardProperties().ByProfileCardPropertieId("profileCardProperty-id").Patch(context.Background(), requestBody, nil)
 
 
 ```

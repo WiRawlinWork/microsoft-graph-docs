@@ -4,16 +4,25 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.New()
-userAccountType := "administrator"
-requestBody.SetUserAccountType(&userAccountType)
-osVersion := "windows10"
-requestBody.SetOsVersion(&osVersion)
-cloudPCId := "cloudPC-id"
-graphClient.DeviceManagement().VirtualEndpoint().CloudPCsById(&cloudPCId).Reprovision(cloudPC-id).Post(requestBody)
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphdevicemanagement "github.com/microsoftgraph/msgraph-beta-sdk-go/devicemanagement"
+	  graphmodels "github.com/microsoftgraph/msgraph-beta-sdk-go/models"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphdevicemanagement.NewReprovisionPostRequestBody()
+userAccountType := graphmodels.ADMINISTRATOR_CLOUDPCUSERACCOUNTTYPE 
+requestBody.SetUserAccountType(&userAccountType) 
+osVersion := graphmodels.WINDOWS10_CLOUDPCOPERATINGSYSTEM 
+requestBody.SetOsVersion(&osVersion) 
+
+graphClient.DeviceManagement().VirtualEndpoint().CloudPCs().ByCloudPCId("cloudPC-id").Reprovision().Post(context.Background(), requestBody, nil)
 
 
 ```

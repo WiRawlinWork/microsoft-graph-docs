@@ -4,16 +4,28 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestParameters := &msgraphsdk.TeamsAppsRequestBuilderPostQueryParameters{
-	RequiresReview: true,
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-sdk-go"
+	  graphappcatalogs "github.com/microsoftgraph/msgraph-sdk-go/appcatalogs"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+
+requestRequiresReview := "true"
+
+requestParameters := &graphappcatalogs.AppCatalogsTeamsAppsRequestBuilderPostQueryParameters{
+	RequiresReview: &requestRequiresReview,
 }
-options := &msgraphsdk.TeamsAppsRequestBuilderPostRequestConfiguration{
+configuration := &graphappcatalogs.AppCatalogsTeamsAppsRequestBuilderPostRequestConfiguration{
 	QueryParameters: requestParameters,
 }
-graphClient.AppCatalogs().TeamsApps().PostWithRequestConfigurationAndResponseHandler(options, nil)
+
+graphClient.AppCatalogs().TeamsApps().Post(context.Background(), configuration)
 
 
 ```

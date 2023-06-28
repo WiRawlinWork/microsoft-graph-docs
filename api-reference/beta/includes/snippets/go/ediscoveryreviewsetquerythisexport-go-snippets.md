@@ -4,22 +4,29 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.New()
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphsecurity "github.com/microsoftgraph/msgraph-beta-sdk-go/security"
+	  graphmodelssecurity "github.com/microsoftgraph/msgraph-beta-sdk-go/models/security"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphsecurity.NewExportPostRequestBody()
 outputName := "Export reviewset query via API"
-requestBody.SetOutputName(&outputName)
+requestBody.SetOutputName(&outputName) 
 description := "Export for the Contoso investigation 2"
-requestBody.SetDescription(&description)
-exportOptions := "originalFiles,fileInfo,tags"
-requestBody.SetExportOptions(&exportOptions)
-exportStructure := "directory"
-requestBody.SetExportStructure(&exportStructure)
-ediscoveryCaseId := "ediscoveryCase-id"
-ediscoveryReviewSetId := "ediscoveryReviewSet-id"
-ediscoveryReviewSetQueryId := "ediscoveryReviewSetQuery-id"
-graphClient.Security().Cases().EdiscoveryCasesById(&ediscoveryCaseId).ReviewSetsById(&ediscoveryReviewSetId).QueriesById(&ediscoveryReviewSetQueryId).Export(ediscoveryCase-id, ediscoveryReviewSet-id, ediscoveryReviewSetQuery-id).Post(requestBody)
+requestBody.SetDescription(&description) 
+exportOptions := graphmodels.ORIGINALFILES,FILEINFO,TAGS_EXPORTOPTIONS 
+requestBody.SetExportOptions(&exportOptions) 
+exportStructure := graphmodels.DIRECTORY_EXPORTFILESTRUCTURE 
+requestBody.SetExportStructure(&exportStructure) 
+
+graphClient.Security().Cases().EdiscoveryCases().ByEdiscoveryCaseId("ediscoveryCase-id").ReviewSets().ByReviewSetId("ediscoveryReviewSet-id").Queries().ByQuerieId("ediscoveryReviewSetQuery-id").MicrosoftGraphSecurityExport().Post(context.Background(), requestBody, nil)
 
 
 ```

@@ -4,20 +4,28 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewCrossTenantAccessPolicyConfigurationPartner()
-inboundTrust := msgraphsdk.NewCrossTenantAccessPolicyInboundTrust()
-requestBody.SetInboundTrust(inboundTrust)
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphmodels "github.com/microsoftgraph/msgraph-beta-sdk-go/models"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphmodels.NewCrossTenantAccessPolicyConfigurationPartner()
+inboundTrust := graphmodels.NewCrossTenantAccessPolicyInboundTrust()
 isMfaAccepted := true
-inboundTrust.SetIsMfaAccepted(&isMfaAccepted)
+inboundTrust.SetIsMfaAccepted(&isMfaAccepted) 
 isCompliantDeviceAccepted := true
-inboundTrust.SetIsCompliantDeviceAccepted(&isCompliantDeviceAccepted)
+inboundTrust.SetIsCompliantDeviceAccepted(&isCompliantDeviceAccepted) 
 isHybridAzureADJoinedDeviceAccepted := true
-inboundTrust.SetIsHybridAzureADJoinedDeviceAccepted(&isHybridAzureADJoinedDeviceAccepted)
-crossTenantAccessPolicyConfigurationPartnerTenantId := "crossTenantAccessPolicyConfigurationPartner-tenantId"
-graphClient.Policies().CrossTenantAccessPolicy().PartnersById(&crossTenantAccessPolicyConfigurationPartnerTenantId).Patch(requestBody)
+inboundTrust.SetIsHybridAzureADJoinedDeviceAccepted(&isHybridAzureADJoinedDeviceAccepted) 
+requestBody.SetInboundTrust(inboundTrust)
+
+result, err := graphClient.Policies().CrossTenantAccessPolicy().Partners().ByPartnerId("crossTenantAccessPolicyConfigurationPartner-tenantId").Patch(context.Background(), requestBody, nil)
 
 
 ```

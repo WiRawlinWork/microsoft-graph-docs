@@ -4,20 +4,32 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewGovernanceRoleSetting()
-requestBody.SetAdminEligibleSettings( []GovernanceRuleSetting {
-	msgraphsdk.NewGovernanceRuleSetting(),
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphmodels "github.com/microsoftgraph/msgraph-beta-sdk-go/models"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphmodels.NewGovernanceRoleSetting()
+
+
+governanceRuleSetting := graphmodels.NewGovernanceRuleSetting()
 ruleIdentifier := "ExpirationRule"
-	SetRuleIdentifier(&ruleIdentifier)
-setting := "{"permanentAssignment":false,"maximumGrantPeriodInMinutes":129600}"
-	SetSetting(&setting)
+governanceRuleSetting.SetRuleIdentifier(&ruleIdentifier) 
+setting := "{\"permanentAssignment\":false,\"maximumGrantPeriodInMinutes\":129600}"
+governanceRuleSetting.SetSetting(&setting) 
+
+adminEligibleSettings := []graphmodels.GovernanceRuleSettingable {
+	governanceRuleSetting,
 }
-privilegedAccessId := "privilegedAccess-id"
-governanceRoleSettingId := "governanceRoleSetting-id"
-graphClient.PrivilegedAccessById(&privilegedAccessId).RoleSettingsById(&governanceRoleSettingId).Patch(requestBody)
+requestBody.SetAdminEligibleSettings(adminEligibleSettings)
+
+result, err := graphClient.PrivilegedAccess().ByPrivilegedAccesId("privilegedAccess-id").RoleSettings().ByRoleSettingId("governanceRoleSetting-id").Patch(context.Background(), requestBody, nil)
 
 
 ```

@@ -4,22 +4,34 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewTerm()
-requestBody.SetLabels( []LocalizedLabel {
-	msgraphsdk.NewLocalizedLabel(),
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-sdk-go"
+	  graphmodelstermstore "github.com/microsoftgraph/msgraph-sdk-go/models/termstore"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphmodelstermstore.NewTerm()
+
+
+localizedLabel := graphmodelstermstore.NewLocalizedLabel()
 languageTag := "en-US"
-	SetLanguageTag(&languageTag)
+localizedLabel.SetLanguageTag(&languageTag) 
 name := "Car"
-	SetName(&name)
+localizedLabel.SetName(&name) 
 isDefault := true
-	SetIsDefault(&isDefault)
+localizedLabel.SetIsDefault(&isDefault) 
+
+labels := []graphmodelstermstore.LocalizedLabelable {
+	localizedLabel,
 }
-siteId := "site-id"
-setId := "set-id"
-result, err := graphClient.SitesById(&siteId).TermStore().SetsById(&setId).Children().Post(requestBody)
+requestBody.SetLabels(labels)
+
+result, err := graphClient.Sites().BySiteId("site-id").TermStore().Sets().BySetId("set-id").Children().Post(context.Background(), requestBody, nil)
 
 
 ```

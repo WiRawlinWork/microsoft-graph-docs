@@ -1,7 +1,7 @@
 ---
 title: "Create userExperienceAnalyticsWorkFromAnywhereModelPerformance"
 description: "Create a new userExperienceAnalyticsWorkFromAnywhereModelPerformance object."
-author: "dougeby"
+author: "jaiprakashmb"
 localization_priority: Normal
 ms.prod: "intune"
 doc_type: apiPageType
@@ -17,7 +17,7 @@ Namespace: microsoft.graph
 
 Create a new [userExperienceAnalyticsWorkFromAnywhereModelPerformance](../resources/intune-devices-userexperienceanalyticsworkfromanywheremodelperformance.md) object.
 
-## Prerequisites
+## Permissions
 One of the following permissions is required to call this API. To learn more, including how to choose permissions, see [Permissions](/graph/permissions-reference).
 
 |Permission type|Permissions (from least to most privileged)|
@@ -48,16 +48,16 @@ The following table shows the properties that are required when you create the u
 
 |Property|Type|Description|
 |:---|:---|:---|
-|id|String|The unique identifier of the user experience analytics model performance object.|
-|model|String|The user experience work from anywhere's model name of the devices.|
-|manufacturer|String|The user experience work from anywhere's manufacturer name of the devices.|
-|modelDeviceCount|Int32|The user experience work from anywhere's devices count for the model. Valid values -2147483648 to 2147483647|
-|workFromAnywhereScore|Double|The user experience work from anywhere overall score for the model. Valid values -1.79769313486232E+308 to 1.79769313486232E+308|
-|windowsScore|Double|The user experience work from anywhere windows score for the model. Valid values -1.79769313486232E+308 to 1.79769313486232E+308|
-|cloudManagementScore|Double|The user experience work from anywhere's cloud management score for the model. Valid values -1.79769313486232E+308 to 1.79769313486232E+308|
-|cloudIdentityScore|Double|The user experience work from anywhere's cloud identity score for the model. Valid values -1.79769313486232E+308 to 1.79769313486232E+308|
-|cloudProvisioningScore|Double|The user experience work from anywhere's cloud provisioning score for the model. Valid values -1.79769313486232E+308 to 1.79769313486232E+308|
-|healthStatus|[userExperienceAnalyticsHealthState](../resources/intune-devices-userexperienceanalyticshealthstate.md)|The health state of the user experience analytics work from anywhere model. Possible values are: `unknown`, `insufficientData`, `needsAttention`, `meetingGoals`.|
+|id|String|The unique identifier of the work from anywhere model performance object. Supports: $select, $OrderBy. Read-only.|
+|model|String|The model name of the device. Supports: $select, $OrderBy. Read-only.|
+|manufacturer|String|The manufacturer name of the device. Supports: $select, $OrderBy. Read-only.|
+|modelDeviceCount|Int32|The devices count for the model. Supports: $select, $OrderBy. Read-only. Valid values -2147483648 to 2147483647|
+|workFromAnywhereScore|Double|The work from anywhere score of the device model. Valid values 0 to 100. Value -1 means associated score is unavailable. Supports: $select, $OrderBy. Read-only. Valid values -1.79769313486232E+308 to 1.79769313486232E+308|
+|windowsScore|Double|The window score of the device model. Valid values 0 to 100. Value -1 means associated score is unavailable. Supports: $select, $OrderBy. Read-only. Valid values -1.79769313486232E+308 to 1.79769313486232E+308|
+|cloudManagementScore|Double|The cloud management score of the device model. Valid values 0 to 100. Value -1 means associated score is unavailable. Supports: $select, $OrderBy. Read-only. Valid values -1.79769313486232E+308 to 1.79769313486232E+308|
+|cloudIdentityScore|Double|The cloud identity score of the device model. Valid values 0 to 100. Value -1 means associated score is unavailable. Supports: $select, $OrderBy. Read-only. Valid values -1.79769313486232E+308 to 1.79769313486232E+308|
+|cloudProvisioningScore|Double|The cloud provisioning score of the device model.  Valid values 0 to 100. Value -1 means associated score is unavailable. Supports: $select, $OrderBy. Read-only. Valid values -1.79769313486232E+308 to 1.79769313486232E+308|
+|healthStatus|[userExperienceAnalyticsHealthState](../resources/intune-devices-userexperienceanalyticshealthstate.md)|The health state of the user experience analytics work from anywhere device model. Possible values are: unknown, insufficientData, needsAttention, meetingGoals. Unknown by default. Supports: $select, $OrderBy. Read-only. Possible values are: `unknown`, `insufficientData`, `needsAttention`, `meetingGoals`, `unknownFutureValue`.|
 
 
 
@@ -108,7 +108,3 @@ Content-Length: 460
   "healthStatus": "insufficientData"
 }
 ```
-
-
-
-

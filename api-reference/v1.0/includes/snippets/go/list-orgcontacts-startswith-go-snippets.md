@@ -4,23 +4,38 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestParameters := &msgraphsdk.ContactsRequestBuilderGetQueryParameters{
-	Filter: "startswith(displayName,'A')",
-	Count: true,
-	Top: 1,
-	Orderby: "displayName",
+import (
+	  "context"
+	  abstractions "github.com/microsoft/kiota-abstractions-go"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-sdk-go"
+	  graphcontacts "github.com/microsoftgraph/msgraph-sdk-go/contacts"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+headers := abstractions.NewRequestHeaders()
+headers.Add("ConsistencyLevel", "eventual")
+
+
+requestFilter := "startswith(displayName,'A')"
+requestCount := true
+requestTop := int32(1)
+
+requestParameters := &graphcontacts.ContactsRequestBuilderGetQueryParameters{
+	Filter: &requestFilter,
+	Count: &requestCount,
+	Top: &requestTop,
+	Orderby: [] string {"displayName"},
 }
-headers := map[string]string{
-	"ConsistencyLevel": "eventual"
-}
-options := &msgraphsdk.ContactsRequestBuilderGetRequestConfiguration{
-	QueryParameters: requestParameters,
+configuration := &graphcontacts.ContactsRequestBuilderGetRequestConfiguration{
 	Headers: headers,
+	QueryParameters: requestParameters,
 }
-result, err := graphClient.Contacts().GetWithRequestConfigurationAndResponseHandler(options, nil)
+
+result, err := graphClient.Contacts().Get(context.Background(), configuration)
 
 
 ```

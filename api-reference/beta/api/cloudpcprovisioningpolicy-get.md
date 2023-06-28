@@ -73,16 +73,13 @@ The following is an example of a request.
 ``` http
 GET https://graph.microsoft.com/beta/deviceManagement/virtualEndpoint/provisioningPolicies/{id}
 ```
+
 # [C#](#tab/csharp)
 [!INCLUDE [sample-code](../includes/snippets/csharp/get-cloudpcprovisioningpolicy-1-csharp-snippets.md)]
 [!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
 # [JavaScript](#tab/javascript)
 [!INCLUDE [sample-code](../includes/snippets/javascript/get-cloudpcprovisioningpolicy-1-javascript-snippets.md)]
-[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
-
-# [Objective-C](#tab/objc)
-[!INCLUDE [sample-code](../includes/snippets/objc/get-cloudpcprovisioningpolicy-1-objc-snippets.md)]
 [!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
 # [Java](#tab/java)
@@ -97,8 +94,15 @@ GET https://graph.microsoft.com/beta/deviceManagement/virtualEndpoint/provisioni
 [!INCLUDE [sample-code](../includes/snippets/powershell/get-cloudpcprovisioningpolicy-1-powershell-snippets.md)]
 [!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
----
+# [PHP](#tab/php)
+[!INCLUDE [sample-code](../includes/snippets/php/get-cloudpcprovisioningpolicy-1-php-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
+# [Python](#tab/python)
+[!INCLUDE [sample-code](../includes/snippets/python/get-cloudpcprovisioningpolicy-1-python-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
+
+---
 
 #### Response
 
@@ -124,6 +128,17 @@ Content-Type: application/json
         "domainJoinType": "hybridAzureADJoin",
         "onPremisesConnectionId": "16ee6c71-fc10-438b-88ac-daa1ccafffff"
     },
+    "domainJoinConfigurations": [
+      {
+        "onPremisesConnectionId": "16ee6c71-fc10-438b-88ac-daa1ccafffff",
+        "type": "hybridAzureADJoin"
+      },
+      {
+        "onPremisesConnectionId": "26e16c71-f210-438b-88ac-d481ccafffff",
+        "type": "hybridAzureADJoin"
+      }
+    ],
+    "enableSingleSignOn": true,
     "id": "1d164206-bf41-4fd2-8424-a3192d39ffff",
     "imageDisplayName": "Image Display Name value",
     "imageId": "Image ID value",
@@ -132,7 +147,8 @@ Content-Type: application/json
     "windowsSettings": {
       "language": "en-US"
     },
-    "managedBy": "windows365"
+    "managedBy": "windows365",
+    "provisioningType": "dedicated"
 }
 ```
 
@@ -152,16 +168,13 @@ The following is an example of a request.
 ``` http
 GET https://graph.microsoft.com/beta/deviceManagement/virtualEndpoint/provisioningPolicies/{id}?$expand=assignments
 ```
+
 # [C#](#tab/csharp)
 [!INCLUDE [sample-code](../includes/snippets/csharp/get-cloudpcprovisioningpolicy-2-csharp-snippets.md)]
 [!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
 # [JavaScript](#tab/javascript)
 [!INCLUDE [sample-code](../includes/snippets/javascript/get-cloudpcprovisioningpolicy-2-javascript-snippets.md)]
-[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
-
-# [Objective-C](#tab/objc)
-[!INCLUDE [sample-code](../includes/snippets/objc/get-cloudpcprovisioningpolicy-2-objc-snippets.md)]
 [!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
 # [Java](#tab/java)
@@ -176,8 +189,15 @@ GET https://graph.microsoft.com/beta/deviceManagement/virtualEndpoint/provisioni
 [!INCLUDE [sample-code](../includes/snippets/powershell/get-cloudpcprovisioningpolicy-2-powershell-snippets.md)]
 [!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
----
+# [PHP](#tab/php)
+[!INCLUDE [sample-code](../includes/snippets/php/get-cloudpcprovisioningpolicy-2-php-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
+# [Python](#tab/python)
+[!INCLUDE [sample-code](../includes/snippets/python/get-cloudpcprovisioningpolicy-2-python-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
+
+---
 
 #### Response
 
@@ -204,6 +224,17 @@ Content-Type: application/json
         "regionName": null,
         "type": "hybridAzureADJoin"
     },
+    "domainJoinConfigurations": [
+      {
+        "onPremisesConnectionId": "16ee6c71-fc10-438b-88ac-daa1ccafffff",
+        "type": "hybridAzureADJoin"
+      },
+      {
+        "onPremisesConnectionId": "26e16c71-f210-438b-88ac-d481ccafffff",
+        "type": "hybridAzureADJoin"
+      }
+    ],
+    "enableSingleSignOn": true,
     "id": "1d164206-bf41-4fd2-8424-a3192d39ffff",
     "imageDisplayName": "Image Display Name value",
     "imageId": "Image ID value",
@@ -222,7 +253,8 @@ Content-Type: application/json
           }
       }
     ],
-    "managedBy": "windows365"
+    "managedBy": "windows365",
+    "provisioningType": "dedicated"
 }
 ```
 
@@ -245,6 +277,7 @@ The following is an example of a request.
 ``` http
 GET https://graph.microsoft.com/beta/deviceManagement/virtualEndpoint/provisioningPolicies/60b94f83-3e22-430e-a69d-440f65b922d6?$select=id,description,displayName,displayName,domainJoinConfiguration,imageDisplayName,imageId,imageType,onPremisesConnectionId,windowsSettings,managedBy,cloudPcGroupDisplayName,gracePeriodInHours,localAdminEnabled,alternateResourceUrl
 ```
+
 # [C#](#tab/csharp)
 [!INCLUDE [sample-code](../includes/snippets/csharp/get-cloudpcprovisioningpolicy-3-csharp-snippets.md)]
 [!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
@@ -265,8 +298,15 @@ GET https://graph.microsoft.com/beta/deviceManagement/virtualEndpoint/provisioni
 [!INCLUDE [sample-code](../includes/snippets/powershell/get-cloudpcprovisioningpolicy-3-powershell-snippets.md)]
 [!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
----
+# [PHP](#tab/php)
+[!INCLUDE [sample-code](../includes/snippets/php/get-cloudpcprovisioningpolicy-3-php-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
 
+# [Python](#tab/python)
+[!INCLUDE [sample-code](../includes/snippets/python/get-cloudpcprovisioningpolicy-3-python-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
+
+---
 
 #### Response
 
@@ -295,6 +335,17 @@ Content-Type: application/json
         "regionName": null,
         "type": "hybridAzureADJoin"
     },
+    "domainJoinConfigurations": [
+      {
+        "onPremisesConnectionId": "16ee6c71-fc10-438b-88ac-daa1ccafffff",
+        "type": "hybridAzureADJoin"
+      },
+      {
+        "onPremisesConnectionId": "26e16c71-f210-438b-88ac-d481ccafffff",
+        "type": "hybridAzureADJoin"
+      }
+    ],
+    "enableSingleSignOn": true,
     "gracePeriodInHours": 2,
     "id": "1d164206-bf41-4fd2-8424-a3192d39ffff",
     "imageDisplayName": "myCustomImage",
@@ -305,6 +356,7 @@ Content-Type: application/json
     "onPremisesConnectionId": "4e47d0f6-6f77-44f0-8893-c0fe1701ffff",
     "windowsSettings": {
       "language": "en-US"
-    }
+    },
+    "provisioningType": "dedicated"
 }
 ```

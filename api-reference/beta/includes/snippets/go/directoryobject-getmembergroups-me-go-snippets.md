@@ -4,13 +4,22 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewSecurityEnabledOnlyRequestBody()
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphusers "github.com/microsoftgraph/msgraph-beta-sdk-go/users"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphusers.NewItemGetMemberGroupsPostRequestBody()
 securityEnabledOnly := true
-requestBody.SetSecurityEnabledOnly(&securityEnabledOnly)
-result, err := graphClient.Me().GetMemberGroups().Post(requestBody)
+requestBody.SetSecurityEnabledOnly(&securityEnabledOnly) 
+
+result, err := graphClient.Me().GetMemberGroups().Post(context.Background(), requestBody, nil)
 
 
 ```

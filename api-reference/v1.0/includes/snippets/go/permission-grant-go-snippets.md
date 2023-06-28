@@ -4,23 +4,39 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.New()
-requestBody.SetRecipients( []DriveRecipient {
-	msgraphsdk.NewDriveRecipient(),
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-sdk-go"
+	  graphshares "github.com/microsoftgraph/msgraph-sdk-go/shares"
+	  graphmodels "github.com/microsoftgraph/msgraph-sdk-go/models"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphshares.NewGrantPostRequestBody()
+
+
+driveRecipient := graphmodels.NewDriveRecipient()
 email := "john@contoso.com"
-	SetEmail(&email)
-	msgraphsdk.NewDriveRecipient(),
+driveRecipient.SetEmail(&email) 
+driveRecipient1 := graphmodels.NewDriveRecipient()
 email := "ryan@external.com"
-	SetEmail(&email)
+driveRecipient1.SetEmail(&email) 
+
+recipients := []graphmodels.DriveRecipientable {
+	driveRecipient,
+	driveRecipient1,
 }
-requestBody.SetRoles( []String {
+requestBody.SetRecipients(recipients)
+roles := []string {
 	"read",
 }
-sharedDriveItemId := "sharedDriveItem-id"
-result, err := graphClient.SharesById(&sharedDriveItemId).Permission().Grant(sharedDriveItem-id).Post(requestBody)
+requestBody.SetRoles(roles)
+
+result, err := graphClient.Shares().ByShareId("sharedDriveItem-id").Permission().Grant().Post(context.Background(), requestBody, nil)
 
 
 ```

@@ -4,39 +4,44 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewInternalDomainFederation()
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphmodels "github.com/microsoftgraph/msgraph-beta-sdk-go/models"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphmodels.NewInternalDomainFederation()
 displayName := "Contoso"
-requestBody.SetDisplayName(&displayName)
+requestBody.SetDisplayName(&displayName) 
 issuerUri := "http://contoso.com/adfs/services/trust"
-requestBody.SetIssuerUri(&issuerUri)
+requestBody.SetIssuerUri(&issuerUri) 
 metadataExchangeUri := "https://sts.contoso.com/adfs/services/trust/mex"
-requestBody.SetMetadataExchangeUri(&metadataExchangeUri)
+requestBody.SetMetadataExchangeUri(&metadataExchangeUri) 
 signingCertificate := "MIIE3jCCAsagAwIBAgIQQcyDaZz3MI"
-requestBody.SetSigningCertificate(&signingCertificate)
+requestBody.SetSigningCertificate(&signingCertificate) 
 passiveSignInUri := "https://sts.contoso.com/adfs/ls"
-requestBody.SetPassiveSignInUri(&passiveSignInUri)
-preferredAuthenticationProtocol := "wsFed"
-requestBody.SetPreferredAuthenticationProtocol(&preferredAuthenticationProtocol)
+requestBody.SetPassiveSignInUri(&passiveSignInUri) 
+preferredAuthenticationProtocol := graphmodels.WSFED_AUTHENTICATIONPROTOCOL 
+requestBody.SetPreferredAuthenticationProtocol(&preferredAuthenticationProtocol) 
 activeSignInUri := "https://sts.contoso.com/adfs/services/trust/2005/usernamemixed"
-requestBody.SetActiveSignInUri(&activeSignInUri)
+requestBody.SetActiveSignInUri(&activeSignInUri) 
 signOutUri := "https://sts.contoso.com/adfs/ls"
-requestBody.SetSignOutUri(&signOutUri)
-promptLoginBehavior := "nativeSupport"
-requestBody.SetPromptLoginBehavior(&promptLoginBehavior)
+requestBody.SetSignOutUri(&signOutUri) 
+promptLoginBehavior := graphmodels.NATIVESUPPORT_PROMPTLOGINBEHAVIOR 
+requestBody.SetPromptLoginBehavior(&promptLoginBehavior) 
 isSignedAuthenticationRequestRequired := true
-requestBody.SetIsSignedAuthenticationRequestRequired(&isSignedAuthenticationRequestRequired)
+requestBody.SetIsSignedAuthenticationRequestRequired(&isSignedAuthenticationRequestRequired) 
 nextSigningCertificate := "MIIE3jCCAsagAwIBAgIQQcyDaZz3MI"
-requestBody.SetNextSigningCertificate(&nextSigningCertificate)
-federatedIdpMfaBehavior := "rejectMfaByFederatedIdp"
-requestBody.SetFederatedIdpMfaBehavior(&federatedIdpMfaBehavior)
-requestBody.SetAdditionalData(map[string]interface{}{
-	"@odata.type": "#microsoft.graph.internalDomainFederation",
-}
-domainId := "domain-id"
-result, err := graphClient.DomainsById(&domainId).FederationConfiguration().Post(requestBody)
+requestBody.SetNextSigningCertificate(&nextSigningCertificate) 
+federatedIdpMfaBehavior := graphmodels.REJECTMFABYFEDERATEDIDP_FEDERATEDIDPMFABEHAVIOR 
+requestBody.SetFederatedIdpMfaBehavior(&federatedIdpMfaBehavior) 
+
+result, err := graphClient.Domains().ByDomainId("domain-id").FederationConfiguration().Post(context.Background(), requestBody, nil)
 
 
 ```

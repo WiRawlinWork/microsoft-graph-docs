@@ -4,14 +4,24 @@ description: "Automatically generated file. DO NOT MODIFY"
 
 ```go
 
-//THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
-graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewServicePrincipalIdsRequestBody()
-requestBody.SetServicePrincipalIds( []String {
+import (
+	  "context"
+	  msgraphsdk "github.com/microsoftgraph/msgraph-beta-sdk-go"
+	  graphidentityprotection "github.com/microsoftgraph/msgraph-beta-sdk-go/identityprotection"
+	  //other-imports
+)
+
+graphClient, err := msgraphsdk.NewGraphServiceClientWithCredentials(cred, scopes)
+
+
+requestBody := graphidentityprotection.NewDismissPostRequestBody()
+servicePrincipalIds := []string {
 	"9089a539-a539-9089-39a5-899039a58990",
 }
-graphClient.IdentityProtection().RiskyServicePrincipals().Dismiss().Post(requestBody)
+requestBody.SetServicePrincipalIds(servicePrincipalIds)
+
+graphClient.IdentityProtection().RiskyServicePrincipals().Dismiss().Post(context.Background(), requestBody, nil)
 
 
 ```
