@@ -3,6 +3,22 @@
     {
       "ChangeList": [
         {
+          "Id": "2c58d7df-1618-44c3-ac30-1a0ad8c45af7",
+          "ApiChange": "Property",
+          "ChangedApiName": "assignedSensitivityLabel",
+          "ChangeType": "Addition",
+          "Description": "Added the **assignedSensitivityLabel** property to the [plannerRoster](https://learn.microsoft.com/en-us/graph/api/resources/plannerRoster?view=graph-rest-beta) resource.",
+          "Target": "plannerRoster"
+        },
+        {
+          "Id": "2c58d7df-1618-44c3-ac30-1a0ad8c45af7",
+          "ApiChange": "Method",
+          "ChangedApiName": "assignSensitivityLabel",
+          "ChangeType": "Addition",
+          "Description": "Added the [assignSensitivityLabel](https://learn.microsoft.com/en-us/graph/api/?view=graph-rest-beta) method to the [assignSensitivityLabel](https://learn.microsoft.com/en-us/graph/api/resources/assignSensitivityLabel?view=graph-rest-beta) resource.",
+          "Target": "assignSensitivityLabel"
+        },
+        {
           "Id": "9125b26a-eff1-4f7a-acd0-46c133b934fa",
           "ApiChange": "Enum type",
           "ChangedApiName": "plannerTaskCompletionRequirements",
